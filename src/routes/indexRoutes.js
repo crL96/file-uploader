@@ -3,7 +3,7 @@ const userController = require("../controllers/userContoller");
 const passport = require("../config/passport");
 
 router.get("/", (req, res) => {
-    res.send("Hello world");
+    res.render("index");
     console.log(req.user)
 });
 
