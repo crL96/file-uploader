@@ -33,6 +33,10 @@ app.use(
 );
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
+app.use((req, res, next) => { // If signed in, store user in currentUser variable so all ejs can access it
+  res.locals.currentUser = req.user;
+  next();
+});
 
 // Router
 app.use("/", indexRouter);
