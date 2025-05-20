@@ -1,5 +1,7 @@
 const path = require("node:path");
 const express = require("express");
+const session = require("express-session");
+const passport = require("./config/passport");
 const indexRouter = require("./routes/indexRoutes");
 require("dotenv").config();
 
@@ -15,6 +17,13 @@ app.set("view engine", "ejs");
 
 
 // App middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 7 days
+}));
+app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 

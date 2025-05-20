@@ -4,6 +4,11 @@ const { body, validationResult } = require("express-validator");
 
 function signUpGet(req, res) {
     res.render("sign-up");
+};
+
+function logInGet(req, res) {
+    res.render("log-in", { errorMessage: req.session.messages });
+    req.session.messages = undefined;
 }
 
 const validateUser = [
@@ -67,4 +72,5 @@ const signUpPost = [
 module.exports = {
     signUpGet,
     signUpPost,
+    logInGet,
 };
