@@ -4,11 +4,20 @@ const { body, validationResult } = require("express-validator");
 
 function signUpGet(req, res) {
     res.render("sign-up");
-};
+}
 
 function logInGet(req, res) {
     res.render("log-in", { errorMessage: req.session.messages });
     req.session.messages = undefined;
+}
+
+function logOut(req, res) {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect("/");
+    });
 }
 
 const validateUser = [
@@ -73,4 +82,5 @@ module.exports = {
     signUpGet,
     signUpPost,
     logInGet,
+    logOut,
 };

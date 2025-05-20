@@ -17,4 +17,6 @@ router.post("/log-in", passport.authenticate("local", {
     failureMessage: true
 }));
 
+router.get("/log-out", userController.logOut);
+
 module.exports = router;
