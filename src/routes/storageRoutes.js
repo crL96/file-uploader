@@ -13,7 +13,6 @@ router.get("/", folderController.storageRootGet);
 router.get("/folder/:folderId/upload", fileController.uploadGet);
 router.post("/folder/:folderId/upload", fileController.uploadPost);
 
-router.get("/folder/:folderId/rename-folder", folderController.renameFolderGet);
 router.post("/folder/:folderId/rename-folder", folderController.renameFolderPost);
 
 router.get("/folder/:folderId/delete-folder", folderController.deleteFolderGet);

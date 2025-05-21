@@ -9,7 +9,7 @@
     <h1><%= folder.name %></h1>
     <a href="/storage/"><button>Go back</button></a>
     <a href="/storage/folder/<%= folder.id %>/upload"><button>Upload file</button></a>
-    <a href="/storage/folder/<%= folder.id %>/rename-folder"><button>Change name</button></a>
+    <button type="button" id="openModalBtn">Change name</button>
     <a href="/storage/folder/<%= folder.id %>/delete-folder"><button>Delete folder</button></a>
     <% if (folder.files) {%>
         <div class="fileContainer gridContainer">
@@ -22,5 +22,16 @@
             <% }); %>
         </div>
     <% } %>
+
+    <dialog id="dialog">
+        <form action="/storage/folder/<%= folder.id %>/rename-folder" method="post">
+            <label for="name">Folder name: </label>
+            <input type="text" name="name" id="name" required>
+            <button type="submit">Update folder</button>
+            <button id="cancelBtn" type="button">Cancel</button>
+        </form>
+    </dialog>
+
+    <script src="/scripts/openModal.js"></script>
 </body>
 </html>
