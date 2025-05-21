@@ -1,16 +1,16 @@
 const router = require("express").Router();
-const checkAuthentication = require("../middleware/checkAuthentication");
+const auth = require("../middleware/auth");
 const fileController = require("../controllers/fileController");
 const folderController = require("../controllers/folderController");
 
-router.get("/", checkAuthentication, folderController.storageRootGet);
+router.get("/", auth.checkAuthentication, folderController.storageRootGet);
 
-router.get("/upload", checkAuthentication, fileController.uploadGet);
-router.post("/upload", checkAuthentication, fileController.uploadPost);
+router.get("/upload", auth.checkAuthentication, fileController.uploadGet);
+router.post("/upload", auth.checkAuthentication, fileController.uploadPost);
 
-router.get("/new-folder", checkAuthentication, folderController.newFolderGet);
-router.post("/new-folder", checkAuthentication, folderController.newFolderPost);
+router.get("/new-folder", auth.checkAuthentication, folderController.newFolderGet);
+router.post("/new-folder", auth.checkAuthentication, folderController.newFolderPost);
 
-router.get("/:folderId", folderController.openFolderGet);
+router.get("/:folderId", auth.checkFolderOwnership, folderController.openFolderGet);
 
 module.exports = router;
