@@ -3,6 +3,7 @@ const userController = require("../controllers/userContoller");
 const fileController = require("../controllers/fileController");
 const passport = require("../config/passport");
 const checkAuthentication = require("../middleware/checkAuthentication");
+const folderController = require("../controllers/folderController");
 
 router.get("/", (req, res) => {
     res.render("index");
@@ -23,5 +24,7 @@ router.get("/log-out", userController.logOut);
 
 router.get("/upload", checkAuthentication, fileController.uploadGet);
 router.post("/upload", checkAuthentication, fileController.uploadPost);
+
+router.get("/storage", checkAuthentication, folderController.storageRootGet);
 
 module.exports = router;
