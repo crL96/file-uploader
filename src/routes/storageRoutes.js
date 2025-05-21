@@ -16,6 +16,9 @@ router.post("/:folderId/upload", fileController.uploadPost);
 router.get("/:folderId/rename-folder", folderController.renameFolderGet);
 router.post("/:folderId/rename-folder", folderController.renameFolderPost);
 
+router.get("/:folderId/delete-folder", folderController.deleteFolderGet);
+router.post("/:folderId/delete-folder", folderController.deleteFolderPost);
+
 router.get("/new-folder", folderController.newFolderGet);
 router.post("/new-folder", folderController.newFolderPost);
 

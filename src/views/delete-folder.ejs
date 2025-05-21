@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rename Folder</title>
+</head>
+<body>
+    <%- include("partials/errors.ejs") %>
+    <form action="/storage/<%= folderId %>/delete-folder" method="post">
+        <legend>Enter <em>"DELETE"</em> to delete folder and all of its content</legend>
+        <input type="text" name="confirm" id="confirm" required>
+        <button type="submit">Delete folder</button>
+    </form>
+    
+</body>
+</html>

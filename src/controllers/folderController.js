@@ -1,4 +1,5 @@
 const prisma = require("../config/prisma");
+const { body, validationResult } = require("express-validator");
 
 async function storageRootGet(req, res) {
     const folders = await prisma.folder.findMany({
@@ -45,6 +46,48 @@ async function renameFolderPost(req, res) {
     }
 }
 
+function deleteFolderGet(req, res) {
+    res.render("delete-folder", {folderId: req.params.folderId });
+}
+
+const validateDeleteFolder = [
+    body("confirm").custom(value => {
+        return (value === "DELETE")
+    }).withMessage("Incorrect delete confirmation")
+]
+
+const deleteFolderPost = [
+    validateDeleteFolder,
+
+    async (req, res) => {
+        try {
+            //Check if validation passed
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).render("delete-folder", {
+                    errors: errors.array(),
+                    folderId: req.params.folderId,
+                });
+            }
+
+            const deleteFilesInFolder = prisma.file.deleteMany({
+                where: { folderId: Number(req.params.folderId) }
+            })
+            const deleteFolder = prisma.folder.delete({
+                where: { id: Number(req.params.folderId) }
+            })
+            await prisma.$transaction([deleteFilesInFolder, deleteFolder]);
+            console.log(deleteFilesInFolder);
+            console.log((deleteFolder));
+            res.redirect("/storage");
+        } catch (error) {
+            console.log(error.message);
+            res.redirect("/");
+        }
+    }
+
+];
+
 async function openFolderGet(req, res) {
     try {
         const folder = await prisma.folder.findUnique({
@@ -65,4 +108,6 @@ module.exports = {
     openFolderGet,
     renameFolderGet,
     renameFolderPost,
+    deleteFolderGet,
+    deleteFolderPost
 }
