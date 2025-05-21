@@ -11,6 +11,7 @@
         <h2><%= file.name %></h2>
         <p>Size: <%= file.size %> bytes</p>
         <a href="/storage/download?fileId=<%= file.id %>">Download</a>
+        <a href="/storage/delete?fileId=<%= file.id %>">Delete</a>
     </div>
     <a href="/storage/folder/<%= file.folderId %>">Go back</a>
     

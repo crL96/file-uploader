@@ -28,4 +28,6 @@ router.get("/folder/:folderId/:fileId", fileController.fileDetailsGet);
 
 router.get("/download", auth.checkFileOwnership, fileController.fileDownloadGet);
 
+router.get("/delete", auth.checkFileOwnership, fileController.fileDeleteGet);
+
 module.exports = router;
