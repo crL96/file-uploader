@@ -9,7 +9,7 @@
     <%- include("partials/errors.ejs") %>
     <form action="/new-folder" method="post">
         <label for="name">Folder name: </label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" required>
         <button type="submit">Create folder</button>
     </form>
     
