@@ -5,8 +5,8 @@ const folderController = require("../controllers/folderController");
 
 router.get("/", auth.checkAuthentication, folderController.storageRootGet);
 
-router.get("/upload", auth.checkAuthentication, fileController.uploadGet);
-router.post("/upload", auth.checkAuthentication, fileController.uploadPost);
+router.get("/:folderId/upload", auth.checkFolderOwnership, fileController.uploadGet);
+router.post("/:folderId/upload", auth.checkFolderOwnership, fileController.uploadPost);
 
 router.get("/new-folder", auth.checkAuthentication, folderController.newFolderGet);
 router.post("/new-folder", auth.checkAuthentication, folderController.newFolderPost);
