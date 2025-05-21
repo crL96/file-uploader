@@ -71,10 +71,26 @@ async function fileDeleteGet(req, res) {
     }
 }
 
+async function fileRenamePost(req, res) {
+    try {
+        const file = await prisma.file.update({
+            where: { id: Number(req.query.fileId) },
+            data: { name: req.body.name }
+        });
+        console.log("FileName updated, id: " + file.id);
+        res.redirect("/storage/folder/" + file.folderId + "/" + file.id);
+    }
+    catch (error) {
+        console.log(error.message);
+        res.redirect("/");
+    }
+}
+
 module.exports = {
     uploadGet,
     uploadPost,
     fileDetailsGet,
     fileDownloadGet,
-    fileDeleteGet
+    fileDeleteGet,
+    fileRenamePost
 };

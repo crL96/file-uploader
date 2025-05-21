@@ -30,4 +30,6 @@ router.get("/download", auth.checkFileOwnership, fileController.fileDownloadGet)
 
 router.get("/delete", auth.checkFileOwnership, fileController.fileDeleteGet);
 
+router.post("/rename-file", auth.checkFileOwnership, fileController.fileRenamePost);
+
 module.exports = router;

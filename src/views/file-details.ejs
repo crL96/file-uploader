@@ -13,8 +13,19 @@
         <p>Uploaded: <%= file.uploadTime.toString().split("GMT")[0] %></p>
         <a href="/storage/download?fileId=<%= file.id %>">Download</a>
         <a href="/storage/delete?fileId=<%= file.id %>">Delete</a>
+        <button id="openModalBtn" type="button">Change name</button>
     </div>
     <a href="/storage/folder/<%= file.folderId %>">Go back</a>
+
+    <dialog id="dialog">
+        <form action="/storage/rename-file?fileId=<%= file.id %>" method="post">
+            <label for="name">New name: </label>
+            <input type="text" name="name" id="name" required>
+            <button type="submit">Save name</button>
+            <button id="cancelBtn" type="button">Cancel</button>
+        </form>
+    </dialog>
     
+    <script src="/scripts/openModal.js"></script>
 </body>
 </html>
