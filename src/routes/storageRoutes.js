@@ -24,4 +24,6 @@ router.post("/new-folder", folderController.newFolderPost);
 
 router.get("/folder/:folderId", folderController.openFolderGet);
 
+router.get("/folder/:folderId/:fileId", fileController.fileDetailsGet);
+
 module.exports = router;
