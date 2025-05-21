@@ -1,9 +1,6 @@
 const router = require("express").Router();
 const userController = require("../controllers/userContoller");
-const fileController = require("../controllers/fileController");
 const passport = require("../config/passport");
-const checkAuthentication = require("../middleware/checkAuthentication");
-const folderController = require("../controllers/folderController");
 
 router.get("/", (req, res) => {
     res.render("index");
