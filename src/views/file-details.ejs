@@ -10,6 +10,7 @@
     <div class="ItemDetails">
         <h2><%= file.name %></h2>
         <p>Size: <%= file.size %> bytes</p>
+        <p>Uploaded: <%= file.uploadTime.toString().split("GMT")[0] %></p>
         <a href="/storage/download?fileId=<%= file.id %>">Download</a>
         <a href="/storage/delete?fileId=<%= file.id %>">Delete</a>
     </div>

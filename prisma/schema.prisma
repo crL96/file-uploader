@@ -23,15 +23,16 @@ model User {
 }
 
 model File {
-  id         Int    @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   name       String
-  path       String @unique
+  path       String   @unique
   size       Int
-  storedName String @unique
-  user       User   @relation(fields: [userId], references: [id])
+  storedName String   @unique
+  user       User     @relation(fields: [userId], references: [id])
   userId     Int
-  folder     Folder @relation(fields: [folderId], references: [id])
+  folder     Folder   @relation(fields: [folderId], references: [id])
   folderId   Int
+  uploadTime DateTime @default(now())
 
   @@unique([folderId, name])
 }
