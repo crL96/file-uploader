@@ -25,7 +25,25 @@ async function checkFolderOwnership(req, res, next) {
     }
 }
 
+async function checkFileOwnership(req, res, next) {
+    try {
+        const { userId } = await prisma.file.findUnique({
+            where: { id: Number(req.query.fileId) },
+            select: { userId: true },
+        });
+        if (req.isAuthenticated() && req.user.id === userId) {
+            next();
+        } else {
+            res.redirect("/");
+        }
+    } catch (error) {
+        console.log(error.message);
+        res.redirect("/");
+    }
+}
+
 module.exports = {
     checkAuthentication,
     checkFolderOwnership,
+    checkFileOwnership
 };

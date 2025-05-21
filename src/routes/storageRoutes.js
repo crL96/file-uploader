@@ -26,6 +26,6 @@ router.get("/folder/:folderId", folderController.openFolderGet);
 
 router.get("/folder/:folderId/:fileId", fileController.fileDetailsGet);
 
-router.get("/download", fileController.fileDownloadGet);
+router.get("/download", auth.checkFileOwnership, fileController.fileDownloadGet);
 
 module.exports = router;
