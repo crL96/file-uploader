@@ -28,6 +28,23 @@ function newFolderGet(req, res) {
     res.render("new-folder");
 }
 
+function renameFolderGet(req, res) {
+    res.render("rename-folder", { folderId: req.params.folderId });
+}
+
+async function renameFolderPost(req, res) {
+    try {
+        await prisma.folder.update({
+            where: { id: Number(req.params.folderId) },
+            data: { name: req.body.name }
+        })
+        res.redirect("/storage/" + req.params.folderId);
+    } catch (error) {
+        console.log(error.message);
+        res.redirect("/");
+    }
+}
+
 async function openFolderGet(req, res) {
     try {
         const folder = await prisma.folder.findUnique({
@@ -46,4 +63,6 @@ module.exports = {
     newFolderGet,
     newFolderPost,
     openFolderGet,
+    renameFolderGet,
+    renameFolderPost,
 }

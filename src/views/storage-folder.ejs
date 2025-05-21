@@ -9,6 +9,7 @@
     <h1><%= folder.name %></h1>
     <a href="/storage/"><button>Go back</button></a>
     <a href="/storage/<%= folder.id %>/upload"><button>Upload file</button></a>
+    <a href="/storage/<%= folder.id %>/rename-folder"><button>Change name</button></a>
     <% if (folder.files) {%>
         <div class="fileContainer gridContainer">
             <% folder.files.forEach(function(file) { %>

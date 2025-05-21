@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rename Folder</title>
+</head>
+<body>
+    <%- include("partials/errors.ejs") %>
+    <form action="/storage/<%= folderId %>/rename-folder" method="post">
+        <label for="name">Folder name: </label>
+        <input type="text" name="name" id="name" required>
+        <button type="submit">Update folder</button>
+    </form>
+    
+</body>
+</html>
