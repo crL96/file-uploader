@@ -21,7 +21,7 @@ const uploadPost = [
                 },
             });
             console.log("File added to database");
-            res.redirect("/storage/" + req.params.folderId);
+            res.redirect("/storage/folder/" + req.params.folderId);
         } catch (error) {
             console.log(error.message);
             res.redirect("/");

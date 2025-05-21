@@ -6,7 +6,7 @@
     <title>Upload</title>
 </head>
 <body>
-    <form action="/storage/<%= folderId %>/upload" method="post" enctype="multipart/form-data">
+    <form action="/storage/folder/<%= folderId %>/upload" method="post" enctype="multipart/form-data">
         <label for="name">Save file as: </label>
         <input type="text" name="name" id="name" required>
         <input type="file" name="uploadedFile" required/>

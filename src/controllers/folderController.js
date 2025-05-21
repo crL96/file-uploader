@@ -39,7 +39,7 @@ async function renameFolderPost(req, res) {
             where: { id: Number(req.params.folderId) },
             data: { name: req.body.name }
         })
-        res.redirect("/storage/" + req.params.folderId);
+        res.redirect("/storage/folder/" + req.params.folderId);
     } catch (error) {
         console.log(error.message);
         res.redirect("/");
@@ -77,8 +77,7 @@ const deleteFolderPost = [
                 where: { id: Number(req.params.folderId) }
             })
             await prisma.$transaction([deleteFilesInFolder, deleteFolder]);
-            console.log(deleteFilesInFolder);
-            console.log((deleteFolder));
+            console.log("Deleted folder and its files");
             res.redirect("/storage");
         } catch (error) {
             console.log(error.message);

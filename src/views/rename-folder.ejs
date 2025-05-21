@@ -7,7 +7,7 @@
 </head>
 <body>
     <%- include("partials/errors.ejs") %>
-    <form action="/storage/<%= folderId %>/rename-folder" method="post">
+    <form action="/storage/folder/<%= folderId %>/rename-folder" method="post">
         <label for="name">Folder name: </label>
         <input type="text" name="name" id="name" required>
         <button type="submit">Update folder</button>

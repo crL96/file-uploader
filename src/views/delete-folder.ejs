@@ -7,7 +7,7 @@
 </head>
 <body>
     <%- include("partials/errors.ejs") %>
-    <form action="/storage/<%= folderId %>/delete-folder" method="post">
+    <form action="/storage/folder/<%= folderId %>/delete-folder" method="post">
         <legend>Enter <em>"DELETE"</em> to delete folder and all of its content</legend>
         <input type="text" name="confirm" id="confirm" required>
         <button type="submit">Delete folder</button>
