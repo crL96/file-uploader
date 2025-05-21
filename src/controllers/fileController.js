@@ -1,5 +1,6 @@
 const upload = require("../config/multer");
 const prisma = require("../config/prisma");
+require("dotenv").config();
 
 function uploadGet(req, res) {
     res.render("upload-form", { folderId: req.params.folderId});
@@ -42,8 +43,23 @@ async function fileDetailsGet(req, res) {
     }
 }
 
+async function fileDownloadGet(req, res) {
+    try {
+        const { path } = await prisma.file.findUnique({
+            where: { id: Number(req.query.fileId) },
+            select: { path: true },
+        })
+        res.sendFile(process.env.PROJECT_ROOT_ABS_PATH + path);
+    }
+    catch (error) {
+        console.log(error.message);
+        res.redirect("/");
+    }
+}
+
 module.exports = {
     uploadGet,
     uploadPost,
-    fileDetailsGet
+    fileDetailsGet,
+    fileDownloadGet
 };
