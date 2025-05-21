@@ -7,12 +7,14 @@
 </head>
 <body>
     <h1>My Storage</h1>
-    <a href="/new-folder"><button>New Folder</button></a>
+    <a href="/storage/new-folder"><button>New Folder</button></a>
     <% if (locals.folders) {%>
         <div class="foldersContainer">
             <% folders.forEach(function(folder) { %>
-                <div>
-                    <%= folder.name %>
+                <div class="folder">
+                    <a href="/storage/<%= folder.id %>">
+                        <%= folder.name %>
+                    </a>
                 </div>
             <% }); %>
         </div>

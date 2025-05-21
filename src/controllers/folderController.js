@@ -28,8 +28,22 @@ function newFolderGet(req, res) {
     res.render("new-folder");
 }
 
+async function openFolderGet(req, res) {
+    try {
+        const folder = await prisma.folder.findUnique({
+            where: { id: Number(req.params.folderId) },
+            include: { files: true }
+        })
+        res.render("storage-folder", { folder: folder });
+    } catch (error) {
+        console.log(error.message);
+        res.redirect("/");
+    }
+}
+
 module.exports = {
     storageRootGet,
     newFolderGet,
-    newFolderPost
+    newFolderPost,
+    openFolderGet,
 }

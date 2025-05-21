@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Storage</title>
+</head>
+<body>
+    <h1><%= folder.name %></h1>
+    <a href="/storage/"><button>Go back</button></a>
+    <% if (folder.files) {%>
+        <div class="fileContainer gridContainer">
+            <% folder.files.forEach(function(file) { %>
+                <div class="file gridChild">
+                    <a href="/storage/<%= file.id %>/">
+                        <%= file.name %>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+</body>
+</html>

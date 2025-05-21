@@ -11,4 +11,6 @@ router.post("/upload", checkAuthentication, fileController.uploadPost);
 router.get("/new-folder", checkAuthentication, folderController.newFolderGet);
 router.post("/new-folder", checkAuthentication, folderController.newFolderPost);
 
+router.get("/:folderId", folderController.openFolderGet);
+
 module.exports = router;
