@@ -22,13 +22,4 @@ router.post("/log-in", passport.authenticate("local", {
 
 router.get("/log-out", userController.logOut);
 
-router.get("/upload", checkAuthentication, fileController.uploadGet);
-router.post("/upload", checkAuthentication, fileController.uploadPost);
-
-router.get("/storage", checkAuthentication, folderController.storageRootGet);
-
-router.get("/new-folder", checkAuthentication, folderController.newFolderGet);
-router.post("/new-folder", checkAuthentication, folderController.newFolderPost);
-
-
 module.exports = router;

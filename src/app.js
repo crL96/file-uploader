@@ -5,6 +5,7 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const prisma = require("./config/prisma");
 const passport = require("./config/passport");
 const indexRouter = require("./routes/indexRoutes");
+const storageRouter = require("./routes/storageRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -38,8 +39,9 @@ app.use((req, res, next) => { // If signed in, store user in currentUser variabl
   next();
 });
 
-// Router
+// Routers
 app.use("/", indexRouter);
+app.use("/storage", storageRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("app listening on port " + PORT));
