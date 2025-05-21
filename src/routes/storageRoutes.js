@@ -3,17 +3,22 @@ const auth = require("../middleware/auth");
 const fileController = require("../controllers/fileController");
 const folderController = require("../controllers/folderController");
 
-router.get("/", auth.checkAuthentication, folderController.storageRootGet);
+// Middleware
+router.use(auth.checkAuthentication);
+router.use("/:folderId", auth.checkFolderOwnership);
 
-router.get("/:folderId/upload", auth.checkFolderOwnership, fileController.uploadGet);
-router.post("/:folderId/upload", auth.checkFolderOwnership, fileController.uploadPost);
+// Routes
+router.get("/", folderController.storageRootGet);
 
-router.get("/:folderId/rename-folder", auth.checkFolderOwnership, folderController.renameFolderGet);
-router.post("/:folderId/rename-folder", auth.checkFolderOwnership, folderController.renameFolderPost);
+router.get("/:folderId/upload", fileController.uploadGet);
+router.post("/:folderId/upload", fileController.uploadPost);
 
-router.get("/new-folder", auth.checkAuthentication, folderController.newFolderGet);
-router.post("/new-folder", auth.checkAuthentication, folderController.newFolderPost);
+router.get("/:folderId/rename-folder", folderController.renameFolderGet);
+router.post("/:folderId/rename-folder", folderController.renameFolderPost);
 
-router.get("/:folderId", auth.checkFolderOwnership, folderController.openFolderGet);
+router.get("/new-folder", folderController.newFolderGet);
+router.post("/new-folder", folderController.newFolderPost);
+
+router.get("/:folderId", folderController.openFolderGet);
 
 module.exports = router;
