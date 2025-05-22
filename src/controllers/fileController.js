@@ -3,6 +3,8 @@ const prisma = require("../config/prisma");
 require("dotenv").config();
 const cloudinary = require("../config/cloudinary");
 const http = require("http");
+const { authenticate } = require("passport");
+const { type } = require("os");
 
 function uploadGet(req, res) {
     res.render("upload-form", { folderId: req.params.folderId});
@@ -15,7 +17,7 @@ const uploadPost = [
         try {
             await cloudinary.uploader.upload_stream(
                 { // Options
-                resource_type: "auto",
+                resource_type: "raw",
                 public_id: req.file.originalname,
                 folder: "file-uploader/" + req.user.id
                 }, 
@@ -33,6 +35,7 @@ const uploadPost = [
                             folderId: Number(req.params.folderId)
                         },
                     });
+                    console.log(response);
                     console.log("File uploaded to cloud and added to database");
                     res.redirect("/storage/folder/" + req.params.folderId);
                 }).end(req.file.buffer);
@@ -80,6 +83,9 @@ async function fileDeleteGet(req, res) {
         const file = await prisma.file.delete({
             where: { id: Number(req.query.fileId) }
         });
+
+        cloudinary.uploader.destroy(`file-uploader/${file.userId}/${file.storedName}`, { resource_type: "raw" });
+
         console.log("File deleted, id: " + file.id);
         res.redirect("/storage/folder/" + file.folderId);
     }
