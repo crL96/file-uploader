@@ -10,17 +10,17 @@ function uploadGet(req, res) {
 }
 
 const validateUpload = [
-    body("uploadedFile").custom(file => {
-        const maxSize = 10 * 1024 * 1024; //10MB
+    body("uploadedFile").custom((value, { req }) => {
+        const maxSize = 1 * 1024 * 1024; //10MB
 
-        if (file.size > maxSize) return false;
+        if (req.file.size > maxSize) return false;
         return true;
     }).withMessage("File size exceeds 10 MB. Please select a smaller file")
 ]
 
 const uploadPost = [
-    validateUpload,
     upload.single("uploadedFile"),
+    validateUpload,
 
     async (req, res) => {
         //Check if validation passed
