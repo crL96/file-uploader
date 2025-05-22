@@ -26,7 +26,7 @@ router.get("/folder/:folderId/:fileId", fileController.fileDetailsGet);
 
 router.get("/download", auth.checkFileOwnership, fileController.fileDownloadGet);
 
-router.get("/delete", auth.checkFileOwnership, fileController.fileDeleteGet);
+router.post("/delete", auth.checkFileOwnership, fileController.fileDeletePost);
 
 router.post("/rename-file", auth.checkFileOwnership, fileController.fileRenamePost);
 

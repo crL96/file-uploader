@@ -98,7 +98,7 @@ async function fileDownloadGet(req, res) {
     }
 }
 
-async function fileDeleteGet(req, res) {
+async function fileDeletePost(req, res) {
     try {
         const file = await prisma.file.delete({
             where: { id: Number(req.query.fileId) }
@@ -135,6 +135,6 @@ module.exports = {
     uploadPost,
     fileDetailsGet,
     fileDownloadGet,
-    fileDeleteGet,
+    fileDeletePost,
     fileRenamePost
 };

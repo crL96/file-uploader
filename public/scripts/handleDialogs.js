@@ -1,13 +1,14 @@
-const openModalBtn = document.querySelector("#openModalBtn");
-const dialog = document.querySelector("#dialog");
-const cancelBtn = document.querySelector("#cancelBtn");
+// Rename dialog
+const openRenameDialogBtn = document.querySelector("#openRenameDialogBtn");
+const renameDialog = document.querySelector("#renameDialog");
+const cancelRenameBtn = document.querySelector("#cancelRenameBtn");
 
-openModalBtn.addEventListener("click", () => {
-    dialog.showModal();
+openRenameDialogBtn.addEventListener("click", () => {
+    renameDialog.showModal();
 });
 
-cancelBtn.addEventListener("click", () => {
-    dialog.close();
+cancelRenameBtn.addEventListener("click", () => {
+    renameDialog.close();
 });
 
 

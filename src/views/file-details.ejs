@@ -12,20 +12,30 @@
         <p>Size: <%= file.size %> bytes</p>
         <p>Uploaded: <%= file.uploadTime.toString().split("GMT")[0] %></p>
         <a href="/storage/download?fileId=<%= file.id %>">Download</a>
-        <a href="/storage/delete?fileId=<%= file.id %>">Delete</a>
-        <button id="openModalBtn" type="button">Change name</button>
+        <button type="button" id="openDelteDialogBtn">Delete file</button>
+        <button id="openRenameDialogBtn" type="button">Change name</button>
     </div>
     <a href="/storage/folder/<%= file.folderId %>">Go back</a>
 
-    <dialog id="dialog">
+    <!-- DIALOGS -->
+    <dialog id="renameDialog">
         <form action="/storage/rename-file?fileId=<%= file.id %>" method="post">
             <label for="name">New name: </label>
             <input type="text" name="name" id="name" required>
             <button type="submit">Save name</button>
-            <button id="cancelBtn" type="button">Cancel</button>
+            <button id="cancelRenameBtn" type="button">Cancel</button>
+        </form>
+    </dialog>
+
+    <dialog id="deleteDialog">
+        <form action="/storage/delete?fileId=<%= file.id %>" method="post" id="deleteForm">
+            <legend>Enter <em>"DELETE"</em> to delete file</legend>
+            <input type="text" name="confirm" id="confirm" required>
+            <button type="submit">Delete file</button>
+            <button id="cancelDeleteBtn" type="button">Cancel</button>
         </form>
     </dialog>
     
-    <script src="/scripts/openModal.js"></script>
+    <script src="/scripts/handleDialogs.js"></script>
 </body>
 </html>
