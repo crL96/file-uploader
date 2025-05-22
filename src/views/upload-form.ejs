@@ -6,6 +6,7 @@
     <title>Upload</title>
 </head>
 <body>
+    <%- include("partials/errors.ejs") %>
     <form action="/storage/folder/<%= folderId %>/upload" method="post" enctype="multipart/form-data" id="uploadForm">
         <input type="file" name="uploadedFile" id="uploadedFile" required/>
         <button type="submit">Upload</button>

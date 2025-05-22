@@ -3,15 +3,35 @@ const prisma = require("../config/prisma");
 require("dotenv").config();
 const cloudinary = require("../config/cloudinary");
 const http = require("http");
+const { body, validationResult } = require("express-validator");
 
 function uploadGet(req, res) {
     res.render("upload-form", { folderId: req.params.folderId});
 }
 
+const validateUpload = [
+    body("uploadedFile").custom(file => {
+        const maxSize = 10 * 1024 * 1024; //10MB
+
+        if (file.size > maxSize) return false;
+        return true;
+    }).withMessage("File size exceeds 10 MB. Please select a smaller file")
+]
+
 const uploadPost = [
+    validateUpload,
     upload.single("uploadedFile"),
 
     async (req, res) => {
+        //Check if validation passed
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render("upload-form", {
+                errors: errors.array(),
+                folderId: req.params.folderId,
+            });
+        }
+
         cloudinary.uploader
             .upload_stream(
                 {
