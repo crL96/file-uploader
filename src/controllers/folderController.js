@@ -1,5 +1,6 @@
 const prisma = require("../config/prisma");
 const { body, validationResult } = require("express-validator");
+const cloudinary = require("../config/cloudinary");
 
 async function storageRootGet(req, res) {
     const folders = await prisma.folder.findMany({
@@ -71,14 +72,27 @@ const deleteFolderPost = [
             }
 
             const deleteFilesInFolder = prisma.file.deleteMany({
-                where: { folderId: Number(req.params.folderId) }
-            })
+                where: { folderId: Number(req.params.folderId) },
+            });
             const deleteFolder = prisma.folder.delete({
-                where: { id: Number(req.params.folderId) }
-            })
+                where: { id: Number(req.params.folderId) },
+            });
+
+            //Delete records in database
             await prisma.$transaction([deleteFilesInFolder, deleteFolder]);
-            console.log("Deleted folder and its files");
             res.redirect("/storage");
+
+            //Delete all files in folder
+            await cloudinary.api.delete_resources_by_prefix(
+                `file-uploader/${req.user.id}/${req.params.folderId}`,
+                { resource_type: "raw" }
+            );
+            //Deletes the empty folder (cant delete non-empty folders)
+            await cloudinary.api.delete_folder(
+                `file-uploader/${req.user.id}/${req.params.folderId}`,
+                { resource_type: "raw" }
+            );
+            console.log("Deleted folder and its files");
         } catch (error) {
             console.log(error.message);
             res.redirect("/");
