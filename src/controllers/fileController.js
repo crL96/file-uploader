@@ -2,6 +2,7 @@ const upload = require("../config/multer");
 const prisma = require("../config/prisma");
 require("dotenv").config();
 const cloudinary = require("../config/cloudinary");
+const http = require("http");
 
 function uploadGet(req, res) {
     res.render("upload-form", { folderId: req.params.folderId});
@@ -58,11 +59,15 @@ async function fileDetailsGet(req, res) {
 
 async function fileDownloadGet(req, res) {
     try {
-        const { path } = await prisma.file.findUnique({
+        const { path, storedName } = await prisma.file.findUnique({
             where: { id: Number(req.query.fileId) },
-            select: { path: true },
+            select: { path: true, storedName: true },
         })
-        res.sendFile(process.env.PROJECT_ROOT_ABS_PATH + path);
+        const externalReq = http.request(path, function(externalRes) {
+            res.setHeader("content-disposition", "attachment; filename=" + storedName );
+            externalRes.pipe(res);
+        });
+        externalReq.end();
     }
     catch (error) {
         console.log(error.message);
