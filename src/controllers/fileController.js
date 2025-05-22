@@ -11,26 +11,31 @@ const uploadPost = [
     upload.single("uploadedFile"),
 
     async (req, res) => {
-        console.log(req.file);
-        const response = await cloudinary.uploader.upload(req.file.path, {
-            resource_type: "auto",
-            use_filename: true,
-            folder: "file-uploader/" + req.user.id
-            });
-
         try {
-            await prisma.file.create({
-                data: {
-                    name: req.file.originalname,
-                    storedName: response.display_name,
-                    path: response.url,
-                    size: req.file.size,
-                    userId: req.user.id,
-                    folderId: Number(req.params.folderId)
-                },
-            });
-            console.log("File added to database");
-            res.redirect("/storage/folder/" + req.params.folderId);
+            await cloudinary.uploader.upload_stream(
+                { // Options
+                resource_type: "auto",
+                public_id: req.file.originalname,
+                folder: "file-uploader/" + req.user.id
+                }, 
+                // Callback
+                async (error, response) => {
+                    if (error) throw error;
+
+                    await prisma.file.create({
+                        data: {
+                            name: req.file.originalname,
+                            storedName: response.display_name,
+                            path: response.url,
+                            size: req.file.size,
+                            userId: req.user.id,
+                            folderId: Number(req.params.folderId)
+                        },
+                    });
+                    console.log("File uploaded to cloud and added to database");
+                    res.redirect("/storage/folder/" + req.params.folderId);
+                }).end(req.file.buffer);
+
         } catch (error) {
             console.log(error.message);
             res.redirect("/");
