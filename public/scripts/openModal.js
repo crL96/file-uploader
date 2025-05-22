@@ -9,3 +9,28 @@ openModalBtn.addEventListener("click", () => {
 cancelBtn.addEventListener("click", () => {
     dialog.close();
 });
+
+
+// Delete dialog
+const openDeleteDialogBtn = document.querySelector("#openDelteDialogBtn");
+const deleteDialog = document.querySelector("#deleteDialog");
+const cancelDeleteBtn = document.querySelector("#cancelDeleteBtn");
+
+openDeleteDialogBtn.addEventListener("click", () => {
+    deleteDialog.showModal();
+});
+
+cancelDeleteBtn.addEventListener("click", () => {
+    deleteDialog.close();
+});
+
+const deleteForm = document.querySelector("#deleteForm");
+deleteForm.addEventListener("submit", e => {
+    const confirmInput = document.querySelector("#confirm");
+    
+    if (confirmInput.value !== "DELETE") {
+        e.preventDefault();
+        alert("Incorrect delete confirmation. Try again")
+    }
+});
+
