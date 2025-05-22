@@ -20,13 +20,13 @@ const uploadPost = [
                     // Options
                     resource_type: "raw",
                     public_id: req.file.originalname,
-                    folder: "file-uploader/" + req.user.id,
+                    folder: "file-uploader/"+ req.user.id + "/" + req.params.folderId,
                 },
                 // Callback
                 async (error, response) => {
                     try {
                         if (error) throw error;
-                        
+
                         await prisma.file.create({
                             data: {
                                 name: req.file.originalname,
@@ -86,7 +86,7 @@ async function fileDeleteGet(req, res) {
             where: { id: Number(req.query.fileId) }
         });
 
-        cloudinary.uploader.destroy(`file-uploader/${file.userId}/${file.storedName}`, { resource_type: "raw" });
+        cloudinary.uploader.destroy(`file-uploader/${file.userId}/${file.folderId}/${file.storedName}`, { resource_type: "raw" });
 
         console.log("File deleted, id: " + file.id);
         res.redirect("/storage/folder/" + file.folderId);
