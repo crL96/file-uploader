@@ -1,6 +1,7 @@
 const upload = require("../config/multer");
 const prisma = require("../config/prisma");
 require("dotenv").config();
+const cloudinary = require("../config/cloudinary");
 
 function uploadGet(req, res) {
     res.render("upload-form", { folderId: req.params.folderId});
@@ -10,12 +11,19 @@ const uploadPost = [
     upload.single("uploadedFile"),
 
     async (req, res) => {
+        console.log(req.file);
+        const response = await cloudinary.uploader.upload(req.file.path, {
+            resource_type: "auto",
+            use_filename: true,
+            folder: "file-uploader/" + req.user.id
+            });
+
         try {
             await prisma.file.create({
                 data: {
-                    name: req.body.name,
-                    storedName: req.file.filename,
-                    path: req.file.path,
+                    name: req.file.originalname,
+                    storedName: response.display_name,
+                    path: response.url,
                     size: req.file.size,
                     userId: req.user.id,
                     folderId: Number(req.params.folderId)
