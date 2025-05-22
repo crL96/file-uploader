@@ -3,8 +3,6 @@ const prisma = require("../config/prisma");
 require("dotenv").config();
 const cloudinary = require("../config/cloudinary");
 const http = require("http");
-const { authenticate } = require("passport");
-const { type } = require("os");
 
 function uploadGet(req, res) {
     res.render("upload-form", { folderId: req.params.folderId});
