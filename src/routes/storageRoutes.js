@@ -10,7 +10,6 @@ router.use("/folder/:folderId", auth.checkFolderOwnership);
 // Routes
 router.get("/", folderController.storageRootGet);
 
-router.get("/folder/:folderId/upload", fileController.uploadGet);
 router.post("/folder/:folderId/upload", fileController.uploadPost);
 
 router.post("/folder/:folderId/rename-folder", folderController.renameFolderPost);

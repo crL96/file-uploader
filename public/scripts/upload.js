@@ -10,3 +10,16 @@ uploadForm.addEventListener("submit", e => {
         alert("File size exceeds 10 MB. Please select a smaller file")
     }
 });
+
+// Upload dialog
+const openUploadDialogBtn = document.querySelector("#openUploadDialogBtn");
+const uploadDialog = document.querySelector("#uploadDialog");
+const cancelUploadBtn = document.querySelector("#cancelUploadBtn");
+
+openUploadDialogBtn.addEventListener("click", () => {
+    uploadDialog.showModal();
+});
+
+cancelUploadBtn.addEventListener("click", () => {
+    uploadDialog.close();
+});

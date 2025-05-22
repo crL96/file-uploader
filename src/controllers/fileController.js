@@ -5,10 +5,6 @@ const cloudinary = require("../config/cloudinary");
 const http = require("http");
 const { body, validationResult } = require("express-validator");
 
-function uploadGet(req, res) {
-    res.render("upload-form", { folderId: req.params.folderId});
-}
-
 const validateUpload = [
     body("uploadedFile").custom((value, { req }) => {
         const maxSize = 1 * 1024 * 1024; //10MB
@@ -131,7 +127,6 @@ async function fileRenamePost(req, res) {
 }
 
 module.exports = {
-    uploadGet,
     uploadPost,
     fileDetailsGet,
     fileDownloadGet,

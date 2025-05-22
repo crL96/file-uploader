@@ -8,7 +8,7 @@
 <body>
     <h1><%= folder.name %></h1>
     <a href="/storage/"><button>Go back</button></a>
-    <a href="/storage/folder/<%= folder.id %>/upload"><button>Upload file</button></a>
+    <button type="button" id="openUploadDialogBtn">Upload file</button>
     <button type="button" id="openRenameDialogBtn">Change name</button>
     <button type="button" id="openDelteDialogBtn">Delete folder</button>
     <% if (folder.files) {%>
@@ -42,6 +42,15 @@
         </form>
     </dialog>
 
+    <dialog id="uploadDialog">
+        <form action="/storage/folder/<%= folder.id %>/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+            <input type="file" name="uploadedFile" id="uploadedFile" required/>
+            <button type="submit">Upload</button>
+            <button id="cancelUploadBtn" type="button">Cancel</button>
+        </form>
+    </dialog>
+
     <script src="/scripts/handleDialogs.js"></script>
+    <script src="/scripts/upload.js"></script>
 </body>
 </html>
