@@ -6,9 +6,11 @@
     <title>Upload</title>
 </head>
 <body>
-    <form action="/storage/folder/<%= folderId %>/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="uploadedFile" required/>
+    <form action="/storage/folder/<%= folderId %>/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+        <input type="file" name="uploadedFile" id="uploadedFile" required/>
         <button type="submit">Upload</button>
     </form>
+
+    <script src="/scripts/upload.js"></script>
 </body>
 </html>
