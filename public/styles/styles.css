@@ -101,6 +101,8 @@ button {
     background-color: #1a1a1a;
     cursor: pointer;
     transition: border-color 0.25s;
+
+    margin-bottom: 0.5rem;
 }
 
 button:hover {
@@ -110,11 +112,14 @@ button:hover {
 }
 
 header {
-    padding: 2rem 0;
+    margin: 0.5rem 0 1rem;
+    padding: 1rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
+
+    border-bottom: 2px solid var(--secondclr);
 }
 
 header > nav {
