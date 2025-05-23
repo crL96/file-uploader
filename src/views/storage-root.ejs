@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Storage</title>
+    <link rel="stylesheet" href="/styles/folders-files.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
@@ -13,11 +14,10 @@
     <% if (locals.folders) {%>
         <div class="foldersContainer">
             <% folders.forEach(function(folder) { %>
-                <div class="folder">
-                    <a href="/storage/folder/<%= folder.id %>">
-                        <%= folder.name %>
-                    </a>
-                </div>
+                <a class="folder" href="/storage/folder/<%= folder.id %>">
+                    <img src="/img/folder.svg" alt="folder">
+                    <h3><%= folder.name %></h3>
+                </a>
             <% }); %>
         </div>
     <% } %>

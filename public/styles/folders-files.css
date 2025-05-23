@@ -1,0 +1,21 @@
+.folder,
+.file {
+    /* max-width: 150px; */
+    text-align: center;
+
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    padding: 0 0.5rem;
+}
+
+.folder img,
+.file img {
+    max-width: 100%;
+}
+
+.foldersContainer,
+.filesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 150px);
+    gap: 1rem;
+}

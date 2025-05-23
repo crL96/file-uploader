@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Storage</title>
+    <link rel="stylesheet" href="/styles/folders-files.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
@@ -14,13 +15,12 @@
     <button type="button" id="openRenameDialogBtn">Change name</button>
     <button type="button" id="openDelteDialogBtn">Delete folder</button>
     <% if (folder.files) {%>
-        <div class="fileContainer gridContainer">
+        <div class="filesContainer">
             <% folder.files.forEach(function(file) { %>
-                <div class="file gridChild">
-                    <a href="/storage/folder/<%= folder.id %>/<%= file.id %>/">
-                        <%= file.name %>
-                    </a>
-                </div>
+                <a class="file" href="/storage/folder/<%= folder.id %>/<%= file.id %>/">
+                    <img src="/img/file.svg" alt="file">
+                    <h3><%= file.name %></h3>
+                </a>
             <% }); %>
         </div>
     <% } %>
