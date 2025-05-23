@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
     <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/forms.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
@@ -13,6 +14,7 @@
         <p class="errorMessage"><%= errorMessage %></p>
     <% } %>
     <form action="/log-in" method="post">
+        <legend>Log In</legend>
         <label for="username">Username: </label>
         <input type="text" name="username" id="username" required>
         <label for="password">Password: </label>

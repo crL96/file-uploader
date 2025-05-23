@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
     <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/forms.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
 
     <%- include("partials/errors.ejs") %>
     <form action="/sign-up" method="post">
+        <legend>Sign Up</legend>
         <label for="username">Username: </label>
         <input type="text" name="username" id="username" required>
         <label for="password">Password: </label>
