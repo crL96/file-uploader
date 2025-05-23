@@ -20,7 +20,7 @@
             <% folder.files.forEach(function(file) { %>
                 <a class="file" href="/storage/folder/<%= folder.id %>/<%= file.id %>/">
                     <img src="/img/file.svg" alt="file">
-                    <h3><%= file.name %></h3>
+                    <h3><%= file.name.substring(0, 42) %></h3>
                 </a>
             <% }); %>
         </div>
