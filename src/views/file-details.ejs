@@ -10,15 +10,15 @@
     <%- include("partials/header.ejs") %>
 
     <h1>File Details</h1>
-    <div class="ItemDetails">
+    <div class="fileDetails">
         <h2><%= file.name %></h2>
-        <p>Size: <%= file.size %> bytes</p>
-        <p>Uploaded: <%= file.uploadTime.toString().split("GMT")[0] %></p>
-        <a href="/storage/download?fileId=<%= file.id %>">Download</a>
+        <p><strong>Size: </strong><%= file.size %> Bytes</p>
+        <p><strong>Uploaded: </strong><%= file.uploadTime.toString().split("GMT")[0] %></p>
+        <a href="/storage/download?fileId=<%= file.id %>"><button>Download</button></a>
         <button type="button" id="openDelteDialogBtn">Delete file</button>
-        <button id="openRenameDialogBtn" type="button">Change name</button>
+        <button id="openRenameDialogBtn" type="button">Rename</button>
     </div>
-    <a href="/storage/folder/<%= file.folderId %>">Go back</a>
+    <a href="/storage/folder/<%= file.folderId %>"><button>Go back</button></a>
 
     <!-- DIALOGS -->
     <dialog id="renameDialog">
