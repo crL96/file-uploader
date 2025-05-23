@@ -1,0 +1,13 @@
+<header>
+    <a class="headerTitle" aria-label="Go back home" href="/"><strong>StoreIT</strong></a>
+    
+    <nav>
+        <% if (locals.currentUser) { %>
+            <a href="/storage">My Storage</a>
+            <a href="/log-out">Log Out</a>
+        <% } else { %>
+            <a href="/log-in">Log In</a>
+            <a href="/sign-up">Sign Up</a>
+        <% } %>
+    </nav>
+</header>

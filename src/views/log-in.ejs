@@ -6,6 +6,8 @@
     <title>Log in</title>
 </head>
 <body>
+    <%- include("partials/header.ejs") %>
+
     <% if (locals.errorMessage) { %>
         <p class="errorMessage"><%= errorMessage %></p>
     <% } %>
