@@ -22,9 +22,8 @@ const uploadPost = [
         //Check if validation passed
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).render("upload-form", {
+            return res.status(400).render("index", {
                 errors: errors.array(),
-                folderId: req.params.folderId,
             });
         }
 
