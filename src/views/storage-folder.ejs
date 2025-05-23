@@ -47,6 +47,7 @@
 
     <dialog id="uploadDialog">
         <form action="/storage/folder/<%= folder.id %>/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+            <legend>Maximum file size: 10MB</legend>
             <input type="file" name="uploadedFile" id="uploadedFile" required/>
             <button type="submit">Upload</button>
             <button id="cancelUploadBtn" type="button">Cancel</button>
