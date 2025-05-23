@@ -7,7 +7,7 @@ const { body, validationResult } = require("express-validator");
 
 const validateUpload = [
     body("uploadedFile").custom((value, { req }) => {
-        const maxSize = 1 * 1024 * 1024; //10MB
+        const maxSize = 10 * 1024 * 1024; //10MB
 
         if (req.file.size > maxSize) return false;
         return true;
