@@ -12,7 +12,7 @@ router.post("/sign-up", userController.signUpPost);
 
 router.get("/log-in", userController.logInGet);
 router.post("/log-in", passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/storage",
     failureRedirect: "/log-in",
     failureMessage: true
 }));
