@@ -31,3 +31,9 @@ form > button {
     list-style: inside;
     margin-bottom: 1rem;
 }
+
+form > a {
+    color: var(--secondclr);
+    text-align: center;
+    margin: 0.5rem;
+}

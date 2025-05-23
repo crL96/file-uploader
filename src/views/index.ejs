@@ -5,15 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Uploader</title>
     <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/forms.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
 
-    <h1>Placeholder</h1>
-    <% if (locals.currentUser) { %>
-        <h1>You are logged in, <%= currentUser.username %>!</h1>
-        <a href="/log-out">Log Out</a>
-    <% } %>
+    <div class="centered">
+        <h1>File storage made simple</h1>
+        <% if (locals.currentUser) { %>
+            <h2>Welcome back, <%= currentUser.username %>!</h1>
+            <a href="/storage"><button>Go to storage</button></a>
+        <% } else { %>
+            <form action="/log-in" method="post">
+                <legend>Log In</legend>
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="username" required>
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password" required>
+                <button type="submit">Log in</button>
+                <a href="/sign-up">Don't have an account? Sign up here!</a>
+            </form>
+            <% } %>
+    </div>
     
 </body>
 </html>

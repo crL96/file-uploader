@@ -71,10 +71,23 @@ body {
     max-width: 1280px;
     padding: 0 2rem;
 }
+
+.centered {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.centered form {
+    text-align: start;
+}
   
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+h2 {
     margin-bottom: 1rem;
 }
   
