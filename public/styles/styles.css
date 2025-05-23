@@ -157,6 +157,13 @@ header a {
     margin-bottom: 0.5rem;
 }
 
+dialog {
+    margin: auto;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
 /* MEDIA QUERIES */
 /* @media (max-width: 800px) {
     Add css here
