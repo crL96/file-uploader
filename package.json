@@ -23,7 +23,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch src/app.js",
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "init-install": "npm install && npx prisma generate",
+    "init-db": "npx prisma migrate dev"
   },
   "repository": {
     "type": "git",
