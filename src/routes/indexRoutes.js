@@ -4,7 +4,6 @@ const passport = require("../config/passport");
 
 router.get("/", (req, res) => {
     res.render("index");
-    console.log(req.user)
 });
 
 router.get("/sign-up", userController.signUpGet);
